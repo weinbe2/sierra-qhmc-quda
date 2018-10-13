@@ -2,7 +2,7 @@
 
 echo ""
 echo "#######"
-echo "# QMP #"
+echo "# QDP #"
 echo "#######"
 
 source env.sh
@@ -11,13 +11,15 @@ pushd $(pwd)
 
 # Download, reconfigure
 cd $BASEDIR/lqcd/src
-git clone https://github.com/usqcd-software/qmp
-mv qmp qmp-git
-cd qmp-git
+git clone https://github.com/usqcd-software/qopqdp
+rm -rf qopqdp-git2
+mv qopqdp qopqdp-git2
+cd qopqdp-git2
 autoreconf
 
 # Build and install
 cd $BASEDIR/qinstall
-./qinstall sierra-quda qmp git
+echo $(pwd)
+./qinstall sierra-quda-no qopqdp git2
 
 popd

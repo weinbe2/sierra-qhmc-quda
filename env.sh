@@ -1,7 +1,7 @@
 
 # USER INPUT: specify the git repo directory and the install directory
 GITDIR=/usr/workspace/wsb/weinberg/script_stack/sierra-qhmc-quda
-BASEDIR=/usr/workspace/wsb/weinberg/script_stack
+BASEDIR=/usr/workspace/wsb/weinberg/script_stack/software
 
 # Various directories of note
 QIODIR=${BASEDIR}/lqcd/install/qio/

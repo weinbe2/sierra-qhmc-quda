@@ -12,6 +12,7 @@ pushd $(pwd)
 # Download, reconfigure
 cd $BASEDIR/lqcd/src
 git clone https://github.com/usqcd-software/qopqdp
+rm -rf qopqdp-git
 mv qopqdp qopqdp-git
 cd qopqdp-git/lib
 sed -i 's:double u0 = 1;://double u0 = 1;:g' common_p.c

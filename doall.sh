@@ -1,5 +1,8 @@
 # For Sierra: update your modules to use `gcc/7.3.1`, `cmake/3.12.1`. 
 
+echo "Run scripts individually for now."
+exit
+
 source env.sh
 
 # Create directories, download qinstall

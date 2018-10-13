@@ -51,12 +51,10 @@ qdpopts=\
 'CFLAGS="'$copt' -fopenmp"'
 
 qopqdp=generic
-qopqdptag=quda
+qopqdptag=noquda
 qopqdpcheck=yes
 qopqdpopts=\
-'--with-quda='$rootdir'/../quda/build \
- --with-cuda='$cuda' \
- CFLAGS="'$copt1' -g -DQDP_PROFILE -fopenmp" \
+'CFLAGS="'$copt1' -g -DQDP_PROFILE -fopenmp" \
  LD="mpiCC" \
  LDFLAGS="-fPIC -fopenmp" \
  LIBS="-lrt -lpthread"'

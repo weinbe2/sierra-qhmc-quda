@@ -24,7 +24,7 @@ mkdir lqcd/install
 # Download qinstall, copy in sierra-quda profile
 
 git clone https://github.com/usqcd-software/qinstall
-cp ${GITDIR}/sierra-quda.prf qinstall/
+cp ${GITDIR}/*.prf qinstall/
 
 # I need to `sed` some directories into `sierra-quda.prf`
 
