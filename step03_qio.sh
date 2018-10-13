@@ -9,6 +9,7 @@ source env.sh
 
 pushd $(pwd)
 
+cd $BASEDIR/lqcd/src
 git clone https://github.com/usqcd-software/qio
 mv qio qio-git
 cd qio-git
