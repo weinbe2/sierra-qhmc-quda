@@ -1,9 +1,9 @@
 #! /bin/bash
 
 echo ""
-echo "#######"
-echo "# QDP #"
-echo "#######"
+echo "##########"
+echo "# QOPQDP #"
+echo "##########"
 
 source env.sh
 
