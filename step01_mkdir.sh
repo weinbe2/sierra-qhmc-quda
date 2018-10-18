@@ -24,7 +24,8 @@ mkdir lqcd/install
 # Download qinstall, copy in sierra-quda profile
 
 git clone https://github.com/usqcd-software/qinstall
-sed -e "s/:BASEDIR:/${BASEDIR}/g" ${GITDIR}/sierra-quda.prf > qinstall/sierra-quda.prf
+cp ${GITDIR}/sierra-quda.prf qinstall/
+sed -i 's\:BASEDIR:\'${BASEDIR}'\g' qinstall/sierra-quda.prf
 
 
 popd
