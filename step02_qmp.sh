@@ -16,6 +16,10 @@ mv qmp qmp-git
 cd qmp-git
 autoreconf
 
+# Clean up build directory just in case
+cd $BASEDIR/lqcd/build/qmp-git/
+rm -rf *
+
 # Build and install
 cd $BASEDIR/qinstall
 ./qinstall sierra-quda qmp git

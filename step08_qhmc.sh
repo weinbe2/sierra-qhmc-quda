@@ -17,6 +17,10 @@ mv qhmc qhmc-git
 cd qhmc-git
 autoreconf
 
+# Clean up build directory just in case
+cd $BASEDIR/lqcd/build/qhmc-git-quda/
+rm -rf *
+
 # Build and install
 cd $BASEDIR/qinstall
 ./qinstall sierra-quda qhmc git

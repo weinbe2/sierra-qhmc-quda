@@ -20,6 +20,10 @@ sed -i 's:u0,://u0,:g' common_p.c
 cd ..
 autoreconf
 
+# Clean up build directory just in case
+cd $BASEDIR/lqcd/build/qopqdp-git-quda/
+rm -rf *
+
 # Build and install
 cd $BASEDIR/qinstall
 ./qinstall sierra-quda qopqdp git

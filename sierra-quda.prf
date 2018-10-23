@@ -54,7 +54,7 @@ qopqdp=generic
 qopqdptag=quda
 qopqdpcheck=yes
 qopqdpopts=\
-'--with-quda='$rootdir'/quda/build \
+'--with-quda='$rootdir'/../quda/build \
  --with-cuda='$cuda' \
  CFLAGS="'$copt1' -g -DQDP_PROFILE -fopenmp" \
  LD="mpiCC" \
@@ -70,7 +70,7 @@ qhmcopts=\
  CFLAGS="'$copt' -g -DQDP_PROFILE -fopenmp" \
  LD="mpiCC" \
  LDFLAGS="-fPIC -fopenmp" \
- LIBS="-L'$cuda'/lib64/ '$rootdir'/quda/build/lib/libquda.a '$cuda'/lib64/libcudart_static.a -lcuda -ldl -lrt -lpthread"'
+ LIBS="-L'$cuda'/lib64/ '$rootdir'/../quda/build/lib/libquda.a '$cuda'/lib64/libcudart_static.a -lcuda -ldl -lrt -lpthread"'
 
 clover=qmp
 clovertag=

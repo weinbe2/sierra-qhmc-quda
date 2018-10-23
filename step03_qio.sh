@@ -22,6 +22,10 @@ autoreconf
 popd
 autoreconf
 
+# Clean up build directory
+cd $BASEDIR/lqcd/build/qio-git/
+rm -rf *
+
 # Build and install
 cd $BASEDIR/qinstall
 ./qinstall sierra-quda qio git
