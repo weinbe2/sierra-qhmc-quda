@@ -5,24 +5,22 @@ echo "########"
 echo "# QHMC #"
 echo "########"
 
-source env.sh
-
-pushd $(pwd)
+source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 
 # Download, reconfigure
 cd $BASEDIR/lqcd/src
-git clone https://github.com/jcosborn/qhmc
-pushd $(pwd)
-mv qhmc qhmc-git
-cd qhmc-git
+if [[ -d qhmc-git ]];then
+	cd qhmc-git
+	git pull
+else
+	git clone https://github.com/jcosborn/qhmc qhmc-git
+	cd qhmc-git
+fi
 autoreconf
 
 # Clean up build directory just in case
-cd $BASEDIR/lqcd/build/qhmc-git-quda/
-rm -rf *
+rm -rf "$BASEDIR/lqcd/build/qhmc-git-quda/"
 
 # Build and install
 cd $BASEDIR/qinstall
 ./qinstall sierra-quda qhmc git
-
-popd

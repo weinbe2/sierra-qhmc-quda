@@ -9,9 +9,11 @@ echo ""
 echo "(Go grab a coffee.)"
 echo ""
 
-source env.sh
+source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 
-pushd $(pwd)
+# Really only for CUDA/QUDA
+module load cmake/3.12.1
+module load gcc/7.3.1
 
 # Download Eigen (for now, this shouldn't be an issue...)
 cd $BASEDIR/quda/eigen/
@@ -24,7 +26,13 @@ rm -rf *.tar.bz2
 
 # Download, reconfigure
 cd $BASEDIR/quda/
-git clone https://github.com/lattice/quda
+if [[ -d quda ]];then
+	cd quda
+	git pull
+	cd ..
+else
+	git clone https://github.com/lattice/quda
+fi
 cd build
 cmake ../quda/ \
 -DEIGEN_INCLUDE_DIR=${EIGENDIR} \
@@ -46,6 +54,4 @@ cmake ../quda/ \
 -DQMP=ON \
 -DQMPHOME=${QMPDIR}
 
-nice make -j32
-
-popd
+make -j32

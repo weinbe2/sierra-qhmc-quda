@@ -11,7 +11,7 @@ copt="$copt1 -mcpu=native"
 
 makeflags="-j48"
 
-cuda=/usr/tce/packages/cuda/cuda-9.2.148
+cuda=$CUDA_HOME
 
 qmp=generic
 qmptag=
@@ -57,7 +57,7 @@ qopqdpopts=\
 '--with-quda='$rootdir'/../quda/build \
  --with-cuda='$cuda' \
  CFLAGS="'$copt1' -g -DQDP_PROFILE -fopenmp" \
- LD="mpiCC" \
+ LD="mpicc" \
  LDFLAGS="-fPIC -fopenmp" \
  LIBS="-lrt -lpthread"'
 
@@ -68,9 +68,9 @@ qhmcopts=\
 '--enable-nc=all \
  --enable-colors=n \
  CFLAGS="'$copt' -g -DQDP_PROFILE -fopenmp" \
- LD="mpiCC" \
+ LD="mpicc" \
  LDFLAGS="-fPIC -fopenmp" \
- LIBS="-L'$cuda'/lib64/ '$rootdir'/../quda/build/lib/libquda.a '$cuda'/lib64/libcudart_static.a -lcuda -ldl -lrt -lpthread"'
+ LIBS="-L'$cuda'/lib64/ '$rootdir'/../quda/build/lib/libquda.a '$cuda'/lib64/libcudart_static.a -lcuda -ldl -lrt -lpthread -L/usr/tce/packages/gcc/gcc-7.3.1/rh/usr/lib/gcc/ppc64le-redhat-linux/7/ -lstdc++"'
 
 clover=qmp
 clovertag=

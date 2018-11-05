@@ -1,27 +1,29 @@
-# For Sierra: update your modules to use `gcc/7.3.1`, `cmake/3.12.1`. 
+#!/usr/bin/env bash
+set -eu -o pipefail
 
 echo "Running everything..."
+source "$(dirname $BASH_SOURCE)/env.sh"
 
 # Create directories, download qinstall
-./step01_mkdir.sh
+run step01_mkdir.sh
 
 # Download, configure, install qmp
-./step02_qmp.sh
+run step02_qmp.sh
 
 # Download, configure, install qio
-./step03_qio.sh
+run step03_qio.sh
 
 # Download, configure, install qla
-./step04_qla.sh
+run step04_qla.sh
 
 # Download, configure, install qdp
-./step05_qdp.sh
+run step05_qdp.sh
 
 # Download, configure, install quda
-./step06_quda.sh
+run step06_quda.sh
 
 # Download, configure, install qopqdp-quda
-./step07_qopqdp.sh
+run step07_qopqdp.sh
 
 # Download, configure, install qhmc-quda
-./step08_qhmc.sh
+run step08_qhmc.sh

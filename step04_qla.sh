@@ -5,24 +5,22 @@ echo "#######"
 echo "# QLA #"
 echo "#######"
 
-source env.sh
-
-pushd $(pwd)
+source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 
 # Download, reconfigure
 cd $BASEDIR/lqcd/src
-git clone https://github.com/usqcd-software/qla
-mv qla qla-git
-cd qla-git
+if [[ -d qla-git ]];then
+	cd qla-git
+	git pull
+else
+	git clone https://github.com/usqcd-software/qla qla-git
+	cd qla-git
+fi
 autoreconf
 
 # Clean up build directory just in case
-cd $BASEDIR/lqcd/build/qla-git-omp/
-rm -rf *
-
+rm -rf "$BASEDIR/lqcd/build/qla-git-omp/"
 
 # Build and install
 cd $BASEDIR/qinstall
 ./qinstall sierra-quda qla git
-
-popd

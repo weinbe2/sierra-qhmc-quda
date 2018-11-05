@@ -5,23 +5,22 @@ echo "#######"
 echo "# QMP #"
 echo "#######"
 
-source env.sh
-
-pushd $(pwd)
+source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 
 # Download, reconfigure
 cd $BASEDIR/lqcd/src
-git clone https://github.com/usqcd-software/qmp
-mv qmp qmp-git
-cd qmp-git
+if [[ -d qmp-git ]];then
+	cd qmp-git
+	git pull
+else
+	git clone https://github.com/usqcd-software/qmp qmp-git
+	cd qmp-git
+fi
 autoreconf
 
 # Clean up build directory just in case
-cd $BASEDIR/lqcd/build/qmp-git/
-rm -rf *
+rm -rf "$BASEDIR/lqcd/build/qmp-git/"
 
 # Build and install
 cd $BASEDIR/qinstall
 ./qinstall sierra-quda qmp git
-
-popd

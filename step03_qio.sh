@@ -5,29 +5,23 @@ echo "#######"
 echo "# QIO #"
 echo "#######"
 
-source env.sh
-
-pushd $(pwd)
+source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 
 cd $BASEDIR/lqcd/src
-git clone https://github.com/usqcd-software/qio
-mv qio qio-git
-cd qio-git
-pushd $(pwd)
-cd other_libs
-rm -rf c-lime
-git clone https://github.com/usqcd-software/c-lime
-cd c-lime
-autoreconf
-popd
+if [[ -d qio-git ]];then
+	cd qio-git
+	git pull
+	git submodule update
+else
+	git clone https://github.com/usqcd-software/qio qio-git
+	cd qio-git
+	git submodule update --init
+fi
 autoreconf
 
 # Clean up build directory
-cd $BASEDIR/lqcd/build/qio-git/
-rm -rf *
+rm -rf "$BASEDIR/lqcd/build/qio-git/"
 
 # Build and install
 cd $BASEDIR/qinstall
 ./qinstall sierra-quda qio git
-
-popd

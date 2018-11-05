@@ -5,25 +5,23 @@ echo "#######"
 echo "# QDP #"
 echo "#######"
 
-source env.sh
-
-pushd $(pwd)
+source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 
 # Download, reconfigure
 cd $BASEDIR/lqcd/src
-git clone https://github.com/usqcd-software/qdp
-mv qdp qdp-git
-cd qdp-git
-sed -i 's/doc //g' Makefile.am # doc complains b/c of no makeinfo
+if [[ -d qdp-git ]];then
+	cd qdp-git
+	git pull
+else
+	git clone https://github.com/usqcd-software/qdp qdp-git
+	cd qdp-git
+	sed -i 's/doc //g' Makefile.am # doc complains b/c of no makeinfo
+fi
 autoreconf
 
 # Clean up build directory just in case
-cd $BASEDIR/lqcd/build/qdp-git-omp/
-rm -rf *
-
+rm -rf "$BASEDIR/lqcd/build/qdp-git-omp/"
 
 # Build and install
 cd $BASEDIR/qinstall
 ./qinstall sierra-quda qdp git
-
-popd

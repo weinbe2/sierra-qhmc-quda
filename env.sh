@@ -1,7 +1,11 @@
+# Subshell will source it again because this variable is not exported.
+[[ -z ${SOURCE_ONCE_ENV_SH+X} ]] || return
+SOURCE_ONCE_ENV_SH=1
+
+set -eu -o pipefail
 
 # USER INPUT: specify the git repo directory and the install directory
-GITDIR=/nfs/tmp2/lsd/weinberg/bin/sierra-qhmc-quda/
-BASEDIR=/nfs/tmp2/lsd/weinberg/bin/scidac/
+BASEDIR="$HOME/pkg_sierra"
 
 # Various directories of note
 QIODIR=${BASEDIR}/lqcd/install/qio/
@@ -9,7 +13,19 @@ QMPDIR=${BASEDIR}/lqcd/install/qio/
 QUDADIR=${BASEDIR}/quda/build/
 EIGENDIR=${BASEDIR}/quda/eigen/Eigen/
 
-# Update modules right of the bat
-module load cmake/3.12.1
-module load gcc/7.3.1
+GITDIR=$(cd "$(dirname "$BASH_SOURCE")"&&pwd)
 
+
+run(){
+	DONE="$BASEDIR/DONE_$1"
+	if [[ -f $DONE ]];then
+		echo "# SKIPPING $1"
+		echo "#	Remove $DONE to force rerun"
+		return
+	fi
+	echo "##########"
+	echo "# STARTING $1"
+	echo "##########"
+	"$GITDIR/$1"
+	touch $DONE
+}
