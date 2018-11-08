@@ -9,7 +9,7 @@ BASEDIR="$HOME/pkg_sierra"
 
 # Various directories of note
 QIODIR=${BASEDIR}/lqcd/install/qio/
-QMPDIR=${BASEDIR}/lqcd/install/qio/
+QMPDIR=${BASEDIR}/lqcd/install/qmp/
 QUDADIR=${BASEDIR}/quda/build/
 EIGENDIR=${BASEDIR}/quda/eigen/Eigen/
 
