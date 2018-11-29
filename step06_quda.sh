@@ -11,10 +11,6 @@ echo ""
 
 source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 
-# Really only for CUDA/QUDA
-module load cmake/3.12.1
-module load gcc/7.3.1
-
 # Download Eigen (for now, this shouldn't be an issue...)
 cd $BASEDIR/quda/eigen/
 wget  http://bitbucket.org/eigen/eigen/get/3.3.5.tar.bz2
