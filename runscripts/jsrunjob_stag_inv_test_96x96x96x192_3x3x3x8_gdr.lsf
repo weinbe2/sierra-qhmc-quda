@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#BSUB -nnodes 54
+# #BSUB -q pdebug
+# #BSUB -G guests
+#BSUB -q pbatch
+#BSUB -G callat_g
+#BSUB -W 45
+#BSUB -o stag_profile.96x96x96x192.n54.3x3x3x8.gdr.%J
+## Uncomment to make this interactive
+# #BSUB -Is
+##
+#BSUB -core_isolation 2
+####BSUB -x
+
+
+module load gcc/7.3.1
+module load cmake/3.12.1
+
+echo "About to change dir"
+
+export QUDA_RESOURCE_PATH=$(pwd)/tunecache_96x96x96x192_3x3x3x8_gdr/
+export QUDA_ENABLE_GDR=1 
+
+
+APP="/nfs/tmp2/lsd/weinberg/new_bin/scidac/quda/build/tests/staggered_invert_test"
+ARG="--rank-order col --dim 32 32 32 24 --gridsize 3 3 3 8 --load-gauge l96t192m00125b480_config.1894.lime --compute-fat-long true --dslash-type staggered --test 1 --niter 1000000 --tol 1e-10 --prec double --prec-sloppy half --mass 0.00125"
+PROG="$APP $ARG"
+#APRUNVAR="jsrun -p16 -r4 --bind=none ./sierra_jsrun.reorder.sh $PROG"
+APRUNVAR="jsrun -p216 -g1 -M \"-gpu\" --bind=none ./sierra_jsrun.reorder.sh $PROG"
+
+echo "About to run job"
+echo "${APRUNVAR}"
+
+$APRUNVAR 
+
+echo "Job ran."
+

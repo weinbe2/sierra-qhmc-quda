@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#BSUB -nnodes 2
+#BSUB -q pdebug
+#BSUB -G guests
+#BSUB -W 30
+#BSUB -o stag_profile.24x24x24x48.n2.1x1x2x4.gdr.%J
+## Uncomment to make this interactive
+# #BSUB -Is
+##
+#BSUB -core_isolation 2
+####BSUB -x
+
+#export HDF5_DISABLE_VERSION_CHECK=2
+
+#source env.sh
+module load gcc/7.3.1
+module load cmake/3.12.1
+
+
+export QUDA_RESOURCE_PATH=$(pwd)/tunecache_24x24x24x48_1x1x2x4_gdr/
+export QUDA_ENABLE_GDR=1 
+
+
+APP="/nfs/tmp2/lsd/weinberg/new_bin/tests/dslash_ctests_l24t48/staggered_invert_test"
+ARG="--rank-order col --dim 24 24 12 12 --gridsize 1 1 2 4 --dslash-type staggered --load-gauge l24t48m0075b480_config.10000.lime --compute-fat-long true --test 1 --niter 1000000 --tol 1e-10 --prec double --prec-sloppy half --mass 0.0075"
+PROG="$APP $ARG"
+
+#APRUNVAR="jsrun -p16 -r4 --bind=none ./sierra_jsrun.reorder.sh $PROG"
+APRUNVAR="jsrun -p8 -g1 -M \"-gpu\" --bind=none ./sierra_jsrun.reorder.sh $PROG"
+
+echo "About to run job"
+echo "${APRUNVAR}"
+
+$APRUNVAR 
+
+echo "Job ran."
+

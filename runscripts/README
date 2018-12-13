@@ -1,0 +1,7 @@
+These are just here as backups. I'll document them soon...
+
+Submit as:
+bsub < jsrunjob_stag_inv_test_24x24x24x48_1x1x2x4_gdr.lsf
+
+Make sure an appropriate executable and tunecache directory exists in the directory.
+
