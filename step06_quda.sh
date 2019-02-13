@@ -13,10 +13,11 @@ source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 
 # Download Eigen (for now, this shouldn't be an issue...)
 cd $BASEDIR/quda/eigen/
-wget  http://bitbucket.org/eigen/eigen/get/3.3.5.tar.bz2
-tar -xvjf 3.3.5.tar.bz2
-mv eigen* Eigen
+wget  http://bitbucket.org/eigen/eigen/get/3.3.7.tar.bz2
+tar -xjf 3.3.7.tar.bz2
 rm -rf *.tar.bz2
+rm -rf Eigen/eigen*
+mv eigen* Eigen
 
 # To QUDA!
 
