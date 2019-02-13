@@ -24,7 +24,9 @@ rm -rf *.tar.bz2
 cd $BASEDIR/quda/
 if [[ -d quda ]];then
 	cd quda
+	git stash
 	git pull
+	if git stash show > /dev/null;then git stash pop;fi
 	cd ..
 else
 	git clone https://github.com/lattice/quda

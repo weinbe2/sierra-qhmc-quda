@@ -11,7 +11,9 @@ source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 cd $BASEDIR/lqcd/src
 if [[ -d qmp-git ]];then
 	cd qmp-git
+	git stash
 	git pull
+	if git stash show > /dev/null;then git stash pop;fi
 else
 	git clone https://github.com/usqcd-software/qmp qmp-git
 	cd qmp-git

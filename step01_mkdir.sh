@@ -22,7 +22,9 @@ cd "$BASEDIR"
 
 if [[ -d qinstall ]];then
 	cd qinstall
+	git stash
 	git pull
+	if git stash show > /dev/null;then git stash pop;fi
 	cd ..
 else
 	git clone https://github.com/usqcd-software/qinstall

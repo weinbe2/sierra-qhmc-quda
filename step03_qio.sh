@@ -10,7 +10,9 @@ source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 cd $BASEDIR/lqcd/src
 if [[ -d qio-git ]];then
 	cd qio-git
+	git stash
 	git pull
+	if git stash show > /dev/null;then git stash pop;fi
 	git submodule update
 else
 	git clone https://github.com/usqcd-software/qio qio-git

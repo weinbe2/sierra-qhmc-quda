@@ -11,7 +11,9 @@ source "$(cd "$(dirname "$BASH_SOURCE")"&&pwd)/env.sh"
 cd $BASEDIR/lqcd/src
 if [[ -d qhmc-git ]];then
 	cd qhmc-git
+	git stash
 	git pull
+	if git stash show > /dev/null;then git stash pop;fi
 else
 	git clone https://github.com/jcosborn/qhmc qhmc-git
 	cd qhmc-git
