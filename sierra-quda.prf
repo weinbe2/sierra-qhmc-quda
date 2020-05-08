@@ -12,6 +12,14 @@ copt="$copt1 -mcpu=native"
 makeflags="-j48"
 
 cuda=$CUDA_HOME
+if [ "X$cuda" == X ];then
+	# summit lives in a different world
+	cuda=$CUDAPATH
+fi
+if [ "X$cuda" == X ];then
+	echo "Undefined CUDA_HOME or CUDAPATH."
+	exit 1
+fi
 
 qmp=generic
 qmptag=
