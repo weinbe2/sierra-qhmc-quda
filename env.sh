@@ -5,7 +5,7 @@ SOURCE_ONCE_ENV_SH=1
 set -eu -o pipefail
 
 # USER INPUT: specify the git repo directory and the install directory
-BASEDIR="$HOME/pkg_sierra"
+BASEDIR="$(pwd)"
 
 # Various directories of note
 QIODIR=${BASEDIR}/lqcd/install/qio/
@@ -16,8 +16,8 @@ EIGENDIR=${BASEDIR}/quda/eigen/Eigen/
 GITDIR=$(cd "$(dirname "$BASH_SOURCE")"&&pwd)
 
 # use the same compiler for everything
-module load cmake/3.12.1
-module load gcc/7.3.1
+module load cmake/3.14.5
+module load gcc/8.3.1
 
 run(){
 	DONE="$BASEDIR/DONE_$1"
