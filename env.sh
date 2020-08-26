@@ -16,8 +16,8 @@ EIGENDIR=${BASEDIR}/quda/eigen/Eigen/
 GITDIR=$(cd "$(dirname "$BASH_SOURCE")"&&pwd)
 
 # use the same compiler for everything
-module load cmake/3.14.5
-module load gcc/8.3.1
+module load cmake
+module load gcc/9.1.0
 
 run(){
 	DONE="$BASEDIR/DONE_$1"
